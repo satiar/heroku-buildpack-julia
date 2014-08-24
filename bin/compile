@@ -19,6 +19,6 @@ JULIA_DIST_URL = "${JULIA_DIST_REMOTE_PATH}${JULIA_DIST_FILE}"
 # Download Julia.deb if not in cache
 if [ ! -f ${CACHE_DIR}/${JULIA_DIST_FILE} ]; then
   echo -n "-----> Downloading Julia 0.3.0....."
-  curl --silent --location ${JULIA_DIST_URL} > ${CACHE_DIR}/${SHUNIT_DIST_TAR}
+  curl --silent --location ${JULIA_DIST_URL} > ${CACHE_DIR}/${JULIA_DIST_FILE}
   echo " done"
 fi
