@@ -10,9 +10,9 @@ CACHE_DIR=$2
 
 BP_DIR=`cd $(dirname $0); cd ..; pwd`
 
-JULIA_DIST_REMOTE_PATH = "https://launchpad.net/~staticfloat/+archive/ubuntu/julianightlies/+build/6285855/+files/"
-JULIA_DIST_FILE = "julia_0.3.0-1189~ubuntu12.04.1_amd64.deb"
-JULIA_DIST_URL = "${JULIA_DIST_REMOTE_PATH}${JULIA_DIST_FILE}"
+JULIA_DIST_REMOTE_PATH="https://launchpad.net/~staticfloat/+archive/ubuntu/julianightlies/+build/6285855/+files/"
+JULIA_DIST_FILE="julia_0.3.0-1189~ubuntu12.04.1_amd64.deb"
+JULIA_DIST_URL="${JULIA_DIST_REMOTE_PATH}${JULIA_DIST_FILE}"
 
 [ ! -d ${CACHE_DIR} ] && mkdir -p ${CACHE_DIR}
 
