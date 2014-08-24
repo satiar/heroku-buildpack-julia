@@ -12,3 +12,14 @@ testDetect()
   assertEquals "Julia" "$(cat ${STD_OUT})"
   assertEquals "" "$(cat ${STD_ERR})"
 }
+
+testNoDetectMissingRequire()
+{
+  mkdir ${BUILD_DIR}/something
+
+  capture ${BUILDPACK_HOME}/bin/detect ${BUILD_DIR}
+
+  assertEquals 1 ${rtrn}
+  assertEquals "no" "$(cat ${STD_OUT})"
+  assertEquals "" "$(cat ${STD_ERR})"
+}
