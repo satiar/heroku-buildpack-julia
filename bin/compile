@@ -40,14 +40,22 @@ fi
 
 echo -n "-----> Installing system dependencies...."
 
-deps="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/julia_0.3.0-1189~ubuntu12.04.1_amd64.deb
-http://ftp.us.debian.org/debian/pool/main/libu/libunwind/libunwind8_1.1-3_amd64.deb"
+deps="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/julia_0.3.0-1189~ubuntu12.04.1_amd64.deb"
 
 for dep in $deps; do
     depb=$(basename $dep)
     echo "        - $depb"
     curl -LO $dep
     dpkg -x $depb ${BUILD_DIR}
+done
+
+othedeps="http://ftp.us.debian.org/debian/pool/main/libu/libunwind/libunwind8_1.1-3_amd64.deb"
+
+for dep in $othedeps; do
+    depb=$(basename $dep)
+    echo "        - $depb"
+    curl -LO $dep
+    dpkg -x -Zgzip $depb ${BUILD_DIR}
 done
 
 echo " done"
