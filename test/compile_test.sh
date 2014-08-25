@@ -8,10 +8,10 @@ testCompile()
   assertEquals 0 ${rtrn}
   assertEquals "" "`cat ${STD_ERR}`"
 
-  assertContains "-----> Downloading Julia 0.3.0"  "`cat ${STD_OUT}`"
-  assertTrue "Should have cached Julia.deb `ls -la ${CACHE_DIR}`" "[ -f ${CACHE_DIR}/julia_0.3.0-1189~ubuntu12.04.1_amd64.deb ]"
+  assertContains "-----> Downloading julia-"  "`cat ${STD_OUT}`"
+  assertTrue "Should have cached Julia tar.gz file `ls -la ${CACHE_DIR}`" "[ -f ${CACHE_DIR}/julia-v0.3.0_768187890c.tar.gz ]"
 
-  assertContains "-----> Installing Julia 0.3.0"  "`cat ${STD_OUT}`"
+  assertContains "-----> Installing julia-"  "`cat ${STD_OUT}`"
   assertTrue "Should have installed julia in build dir: `ls -la ${BUILD_DIR}`" "[ -d ${BUILD_DIR}/.julia ]"
 
   # Run again to ensure cache is used.
@@ -19,7 +19,7 @@ testCompile()
   resetCapture
 
   capture ${BUILDPACK_HOME}/bin/compile ${BUILD_DIR} ${CACHE_DIR}
-  assertNotContains "-----> Downloading Julia 0.3.0"  "`cat ${STD_OUT}`"
+  assertNotContains "-----> Downloading julia-"  "`cat ${STD_OUT}`"
 
   assertEquals 0 ${rtrn}
   assertEquals "" "`cat ${STD_ERR}`"
