@@ -10,7 +10,7 @@ CACHE_DIR=$2
 
 BP_DIR=`cd $(dirname $0); cd ..; pwd`
 
-JULIA_VERSION="0.3.0"
+JULIA_VERSION="v0.3.0"
 JULIA_DIST="julia-${JULIA_VERSION}"
 JULIA_DIST_TAR="julia-v0.3.0_768187890c.tar.gz"
 JULIA_DIST_TAR_URL="https://github.com/JuliaLang/julia/releases/download/v0.3.0/${JULIA_DIST_TAR}"
