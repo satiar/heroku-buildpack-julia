@@ -18,7 +18,18 @@ JULIA_DIST_URL="${JULIA_DIST_REMOTE_PATH}${JULIA_DIST_FILE}"
 
 # Download Julia.deb if not in cache
 if [ ! -f ${CACHE_DIR}/${JULIA_DIST_FILE} ]; then
-  echo -n "-----> Downloading Julia 0.3.0....."
+  echo -n "-----> Downloading Julia 0.3.0 (${JULIA_DIST_FILE})....."
   curl --silent --location ${JULIA_DIST_URL} > ${CACHE_DIR}/${JULIA_DIST_FILE}
   echo " done"
+fi
+
+echo -n "-----> Installing Julia 0.3.0...."
+
+cd ${BUILD_DIR}
+dpkg -i ${CACHE_DIR}/${JULIA_DIST_FILE}
+echo " done"
+
+if [ "${PIPESTATUS[*]}" != "0" ]; then
+  echo " !     Failed to install ${SHUNIT_DIST}"
+  exit 1
 fi
