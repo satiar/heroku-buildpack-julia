@@ -9,7 +9,7 @@ testCompile()
   assertEquals "" "`cat ${STD_ERR}`"
 
   assertContains "-----> Downloading julia-"  "`cat ${STD_OUT}`"
-  assertTrue "Should have cached Julia tar.gz file `ls -la ${CACHE_DIR}`" "[ -f ${CACHE_DIR}/julia-v0.3.0_768187890c.tar.gz ]"
+  assertTrue "Should have cached Julia tar.gz file `ls -la ${CACHE_DIR}`" "[ -f ${CACHE_DIR}/julia-v0.3.0.tar.gz ]"
 
   assertContains "-----> Installing julia-"  "`cat ${STD_OUT}`"
   assertTrue "Should have installed julia in build dir: `ls -la ${BUILD_DIR}`" "[ -d ${BUILD_DIR}/.julia ]"
