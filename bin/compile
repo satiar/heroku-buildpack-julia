@@ -62,7 +62,7 @@ for dep in $deps; do
     depb=$(basename $dep)
     echo "        - $depb"
     curl -LO $dep
-    dpkg -x $depb ${BUILD_DIR}
+    dpkg -xfj $depb ${BUILD_DIR}
 done
 
 
