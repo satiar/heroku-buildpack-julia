@@ -37,3 +37,21 @@ if [ "${PIPESTATUS[*]}" != "0" ]; then
   echo " !     Failed to install ${JULIA_DIST}"
   exit 1
 fi
+
+echo -n "-----> Installing system dependencies...."
+
+deps="http://mirrors.kernel.org/ubuntu/pool/main/libu/libunwind/libunwind8_1.1-3ubuntu1_amd64.deb"
+
+for dep in $deps; do
+    depb=$(basename $dep)
+    echo "        - $depb"
+    curl -LO $dep
+    dpkg -x $depb ${BUILD_DIR}
+done
+
+echo " done"
+
+if [ "${PIPESTATUS[*]}" != "0" ]; then
+  echo " !     Failed to install ${JULIA_DIST}"
+  exit 1
+fi
