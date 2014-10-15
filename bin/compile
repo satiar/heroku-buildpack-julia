@@ -17,7 +17,7 @@ JULIA_DIST_TAR_URL="https://github.com/JuliaLab/heroku-buildpack-julia/releases/
 JULIA_HOME="${BUILD_DIR}/.julia"
 
 [ ! -d ${CACHE_DIR} ] && mkdir -p ${CACHE_DIR}
-
+echo "BEGINNING TO DOWNLOAD"
 # Download Julia if not in cache
 if [ ! -f ${CACHE_DIR}/${JULIA_DIST_TAR} ]; then
   echo -n "-----> Downloading ${JULIA_DIST}....."
