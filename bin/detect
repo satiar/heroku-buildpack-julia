@@ -3,6 +3,8 @@
 
 BUILD_DIR=$1
 
+echo -n "IN DETECT"
+
 for f in ${BUILD_DIR}/REQUIRE
 do
   if [ ! -e ${f} ]; then
