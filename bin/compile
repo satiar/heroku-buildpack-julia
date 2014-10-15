@@ -4,6 +4,7 @@
 # fail fast
 set -e
 
+echo -n "IN COMPILE"
 # parse args
 BUILD_DIR=$1
 CACHE_DIR=$2
@@ -16,8 +17,10 @@ JULIA_DIST_TAR="julia-v0.3.0.tar.gz"
 JULIA_DIST_TAR_URL="https://github.com/JuliaLab/heroku-buildpack-julia/releases/download/0.3.0/${JULIA_DIST_TAR}"
 JULIA_HOME="${BUILD_DIR}/.julia"
 
+echo -n $JULIA_DIST_TAR_URL
+
 [ ! -d ${CACHE_DIR} ] && mkdir -p ${CACHE_DIR}
-echo "BEGINNING TO DOWNLOAD"
+echo -n "BEGINNING TO DOWNLOAD"
 # Download Julia if not in cache
 if [ ! -f ${CACHE_DIR}/${JULIA_DIST_TAR} ]; then
   echo -n "-----> Downloading ${JULIA_DIST}....."
