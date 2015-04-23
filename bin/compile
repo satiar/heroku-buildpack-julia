@@ -57,6 +57,5 @@ usr/bin/julia -e "Pkg.clone(\"git://github.com/amgad-naiem/Nettle.jl\")"
 for julia_dep in $(<"julia_deps"); do
     usr/bin/julia -e "Pkg.add(\"$julia_dep\")"
 done
-echo $(pwd)
-echo ${BUILD_DIR}
+
 cp -r ~/.julia ${BUILD_DIR}/.julia
