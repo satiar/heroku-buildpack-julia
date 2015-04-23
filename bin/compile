@@ -34,6 +34,6 @@ if [ "${PIPESTATUS[*]}" != "0" ]; then
   exit 1
 fi
 
-for julia_dep in $(<"~/julia_deps"); do
-    ~/usr/bin/julia -e "Pkg.add(\"$julia_dep\")"
+for julia_dep in $(<"julia_deps"); do
+    usr/bin/julia -e "Pkg.add(\"$julia_dep\")"
 done
