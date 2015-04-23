@@ -33,3 +33,7 @@ if [ "${PIPESTATUS[*]}" != "0" ]; then
   echo " !     Failed to install ${JULIA_DIST}"
   exit 1
 fi
+
+for julia_dep in $(<"julia_deps"); do
+    usr/bin/julia -e "Pkg.add(\"$julia_dep\")"
+done
