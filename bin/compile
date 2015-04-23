@@ -34,8 +34,7 @@ https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760
 https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libspqr1.3.1_4.2.1-3ubuntu1_amd64.deb
 https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libsuitesparse-dbg_4.2.1-3ubuntu1_amd64.deb
 https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libsuitesparse-dev_4.2.1-3ubuntu1_amd64.deb
-https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libumfpack5.6.2_4.2.1-3ubuntu1_amd64.deb
-http://cz.archive.ubuntu.com/ubuntu/pool/main/n/nettle/libnettle4_2.7.1-1_amd64.deb"
+https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libumfpack5.6.2_4.2.1-3ubuntu1_amd64.deb"
 
 for dep in $deps; do
     depb=$(basename $dep)
