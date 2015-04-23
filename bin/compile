@@ -59,3 +59,5 @@ for julia_dep in $(<"julia_deps"); do
 done
 
 cp -r ~/.julia ${BUILD_DIR}/.julia
+
+PATH=$PATH:~/usr/bin
