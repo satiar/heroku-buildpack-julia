@@ -52,6 +52,7 @@ if [ "${PIPESTATUS[*]}" != "0" ]; then
   exit 1
 fi
 
+export LD_LIBRARY_PATH=/app/usr/lib
 for julia_dep in $(<"julia_deps"); do
     usr/bin/julia -e "Pkg.add(\"$julia_dep\")"
 done
