@@ -60,3 +60,5 @@ done
 echo $(pwd)
 echo ${BUILD_DIR}
 cp -r ~/.julia ${BUILD_DIR}/julia2
+rm -rf ~/.julia
+cp ${BUILD_DIR}/julia2 ${BUILD_DIR}/.julia
