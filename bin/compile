@@ -10,10 +10,10 @@ CACHE_DIR=$2
 
 BP_DIR=`cd $(dirname $0); cd ..; pwd`
 
-JULIA_VERSION="v0.3.0"
-JULIA_DIST="julia-v0.3.0"
-JULIA_DIST_TAR="julia-v0.3.0.tar.gz"
-JULIA_DIST_TAR_URL="https://github.com/JuliaLab/heroku-buildpack-julia/releases/download/0.3.0/${JULIA_DIST_TAR}"
+JULIA_VERSION="v0.3.7"
+JULIA_DIST="julia-v0.3.7"
+JULIA_DIST_TAR="julia_0.3.7.orig.tar.gz"
+JULIA_DIST_TAR_URL="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/${JULIA_DIST_TAR}"
 JULIA_HOME="${BUILD_DIR}/.julia"
 
 [ ! -d ${CACHE_DIR} ] && mkdir -p ${CACHE_DIR}
@@ -40,8 +40,9 @@ fi
 
 echo -n "-----> Installing system dependencies...."
 
-deps="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/julia_0.3.0-1189~ubuntu12.04.1_amd64.deb
-http://mirrors.kernel.org/ubuntu/pool/main/libu/libunwind/libunwind8_1.1-3ubuntu1_amd64.deb"
+deps="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/libopenblas-base_0.2.8.1-juliadeps4~raring_amd64.deb
+https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/librmath-base_2.15.2-juliadeps2~raring_amd64.deb
+https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/librmath-julia-base_2.15.2-juliadeps2~saucy_amd64.deb"
 
 for dep in $deps; do
     depb=$(basename $dep)
