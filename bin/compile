@@ -53,7 +53,6 @@ if [ "${PIPESTATUS[*]}" != "0" ]; then
 fi
 
 export LD_LIBRARY_PATH=/app/usr/lib
-usr/bin/julia -e "Pkg.statut()"
 usr/bin/julia -e "Pkg.update()"
 usr/bin/julia -e "Pkg.clone(\"git://github.com/amgad-naiem/Nettle.jl\")"
 for julia_dep in $(<"julia_deps"); do
