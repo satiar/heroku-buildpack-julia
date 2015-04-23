@@ -4,5 +4,5 @@
 cat <<EOF
 ---
 default_process_types:
-  julia: .julia/bin/julia .
+  web: .julia/bin/julia .
 EOF
