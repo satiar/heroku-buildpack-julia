@@ -10,6 +10,8 @@ CACHE_DIR=$2
 
 BP_DIR=`cd $(dirname $0); cd ..; pwd`
 
+cd ${BUILD_DIR}
+
 echo -n "-----> Installing julia with dependencies...."
 
 deps="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/julia_0.3.7-trusty1_amd64.deb
