@@ -10,37 +10,10 @@ CACHE_DIR=$2
 
 BP_DIR=`cd $(dirname $0); cd ..; pwd`
 
-JULIA_VERSION="v0.3.7"
-JULIA_DIST="julia"
-JULIA_DIST_TAR="julia_0.3.7.orig.tar.gz"
-JULIA_DIST_TAR_URL="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/${JULIA_DIST_TAR}"
-JULIA_HOME="${BUILD_DIR}/.julia"
+echo -n "-----> Installing julia with dependencies...."
 
-[ ! -d ${CACHE_DIR} ] && mkdir -p ${CACHE_DIR}
-
-# Download Julia if not in cache
-if [ ! -f ${CACHE_DIR}/${JULIA_DIST_TAR} ]; then
-  echo -n "-----> Downloading ${JULIA_DIST}....."
-  curl --silent --location ${JULIA_DIST_TAR_URL} > ${CACHE_DIR}/${JULIA_DIST_TAR}
-  echo " done"
-fi
-
-echo -n "-----> Installing ${JULIA_DIST}...."
-
-# Untar Julia
-cd ${BUILD_DIR}
-tar -zxf ${CACHE_DIR}/${JULIA_DIST_TAR}
-mv ${JULIA_DIST} ${JULIA_HOME}
-echo " done"
-
-if [ "${PIPESTATUS[*]}" != "0" ]; then
-  echo " !     Failed to install ${JULIA_DIST}"
-  exit 1
-fi
-
-echo -n "-----> Installing system dependencies...."
-
-deps="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/libopenblas-base_0.2.8.1-juliadeps4~raring_amd64.deb
+deps="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/julia_0.3.7-trusty1_amd64.deb
+https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/libopenblas-base_0.2.8.1-juliadeps4~raring_amd64.deb
 https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/librmath-base_2.15.2-juliadeps2~raring_amd64.deb
 https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/librmath-julia-base_2.15.2-juliadeps2~saucy_amd64.deb"
 
