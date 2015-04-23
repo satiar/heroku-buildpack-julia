@@ -4,5 +4,5 @@
 cat <<EOF
 ---
 default_process_types:
-  web: usr/bin/julia ./app.jl
+  web: usr/bin/julia ./app.jl $PORT
 EOF
