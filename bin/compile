@@ -12,37 +12,13 @@ BP_DIR=`cd $(dirname $0); cd ..; pwd`
 
 cd ${BUILD_DIR}
 
-echo -n "-----> Installing julia with dependencies...."
+echo -n "-----> Installing julia ...."
 
-deps="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/julia_0.3.7-trusty1_amd64.deb"
-# https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/libopenblas-base_0.2.8.1-juliadeps4~raring_amd64.deb
-# https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/libopenblas-dev_0.2.8.1-juliadeps4~raring_amd64.deb
-# https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/librmath-base_2.15.2-juliadeps2~raring_amd64.deb
-# https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/librmath-dev_2.15.2-juliadeps2~raring_amd64.deb
-# https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/librmath-julia-base_2.15.2-juliadeps2~saucy_amd64.deb
-# https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/librmath-julia-dev_2.15.2-juliadeps2~saucy_amd64.deb
-# https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libamd2.3.1_4.2.1-3ubuntu1_amd64.deb
-# https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libbtf1.2.0_4.2.1-3ubuntu1_amd64.deb
-# https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libcamd2.3.1_4.2.1-3ubuntu1_amd64.deb
-# https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libccolamd2.8.0_4.2.1-3ubuntu1_amd64.deb
-# https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libcholmod2.1.2_4.2.1-3ubuntu1_amd64.deb
-# https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libcolamd2.8.0_4.2.1-3ubuntu1_amd64.deb
-# https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libcsparse3.1.2_4.2.1-3ubuntu1_amd64.deb
-# https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libcxsparse3.1.2_4.2.1-3ubuntu1_amd64.deb
-# https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libklu1.2.1_4.2.1-3ubuntu1_amd64.deb
-# https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libldl2.1.0_4.2.1-3ubuntu1_amd64.deb
-# https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libspqr1.3.1_4.2.1-3ubuntu1_amd64.deb
-# https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libsuitesparse-dbg_4.2.1-3ubuntu1_amd64.deb
-# https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libsuitesparse-dev_4.2.1-3ubuntu1_amd64.deb
-# https://launchpad.net/ubuntu/+source/suitesparse/1:4.2.1-3ubuntu1/+build/5358760/+files/libumfpack5.6.2_4.2.1-3ubuntu1_amd64.deb"
-
-for dep in $deps; do
-    depb=$(basename $dep)
-    echo "        - $depb"
-    curl -LO $dep
-    dpkg -x $depb ${BUILD_DIR}
-done
-
+dep="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/julia_0.3.7-trusty1_amd64.deb"
+depb=$(basename $dep)
+echo "        - $depb"
+curl -LO $dep
+dpkg -x $depb ${BUILD_DIR}
 
 echo " done"
 
@@ -54,7 +30,7 @@ fi
 # these are not presistent in heroku
 usr/bin/julia -e "Pkg.update()"
 usr/bin/julia -e "Pkg.clone(\"git://github.com/amgad-naiem/Nettle.jl\")"
-for julia_dep in $(<"julia_deps"); do
+for julia_dep in $(<"REQUIRE"); do
     usr/bin/julia -e "Pkg.add(\"$julia_dep\")"
 done
 
