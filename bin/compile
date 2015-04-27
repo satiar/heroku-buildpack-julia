@@ -20,7 +20,7 @@ echo -n "-----> Installing julia ...."
 # curl -LO $dep
 # dpkg -x $depb ${BUILD_DIR}
 
-julia_source="https://github.com/JuliaLang/julia/releases/download/v0.3.7/julia-0.3.7_cb9bcae93a.tar.gz"
+dep="https://github.com/JuliaLang/julia/releases/download/v0.3.7/julia-0.3.7_cb9bcae93a.tar.gz"
 depb=$(basename $dep)
 echo "        - $depb"
 curl -LO $dep
