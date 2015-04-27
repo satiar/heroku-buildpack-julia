@@ -14,11 +14,19 @@ cd ${BUILD_DIR}
 
 echo -n "-----> Installing julia ...."
 
-dep="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/julia_0.3.7-trusty1_amd64.deb"
+# dep="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/julia_0.3.7-trusty1_amd64.deb"
+# depb=$(basename $dep)
+# echo "        - $depb"
+# curl -LO $dep
+# dpkg -x $depb ${BUILD_DIR}
+
+julia_source="https://github.com/JuliaLang/julia/releases/download/v0.3.7/julia-0.3.7_cb9bcae93a.tar.gz"
 depb=$(basename $dep)
 echo "        - $depb"
 curl -LO $dep
-dpkg -x $depb ${BUILD_DIR}
+tar -zxf $depb
+cd julia
+make
 
 echo " done"
 
@@ -27,11 +35,12 @@ if [ "${PIPESTATUS[*]}" != "0" ]; then
   exit 1
 fi
 
+cd ${BUILD_DIR}
 # these are not presistent in heroku
-usr/bin/julia -e "Pkg.update()"
-usr/bin/julia -e "Pkg.clone(\"git://github.com/amgad-naiem/Nettle.jl\")"
+julia/usr/bin/julia -e "Pkg.update()"
+julia/usr/bin/julia -e "Pkg.clone(\"git://github.com/amgad-naiem/Nettle.jl\")"
 for julia_dep in $(<"REQUIRE"); do
-    usr/bin/julia -e "Pkg.add(\"$julia_dep\")"
+    julia/usr/bin/julia -e "Pkg.add(\"$julia_dep\")"
 done
 
 cp -r ~/.julia ${BUILD_DIR}/.julia
