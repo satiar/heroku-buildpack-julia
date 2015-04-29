@@ -31,7 +31,8 @@ for dep in $deps; do
   dpkg -x $depb ${BUILD_DIR}/julia
 done
 
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${BUILD_DIR}/julia/usr/lib:${BUILD_DIR}/julia/usr/lib/x86_64-linux-gnu/
+LD_LIBRARY_PATH='$LD_LIBRARY_PATH:${BUILD_DIR}/julia/usr/lib:${BUILD_DIR}/julia/usr/lib/x86_64-linux-gnu'
+echo $LD_LIBRARY_PATH
 set-env PATH '$HOME/julia/usr/bin/julia:$PATH'
 set-env LIBRARY_PATH '$HOME/julia/usr/lib:$HOME/julia/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH'
 set-env LD_LIBRARY_PATH '$HOME/julia/usr/lib:$HOME/julia/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH'
