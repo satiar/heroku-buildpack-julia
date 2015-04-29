@@ -14,11 +14,14 @@ cd ${BUILD_DIR}
 
 echo -n "-----> Installing julia ...."
 
-dep="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/julia_0.3.7-trusty1_amd64.deb"
-depb=$(basename $dep)
-echo "        - $depb"
-curl -LO $dep
-dpkg -x $depb ${BUILD_DIR}/julia
+deps="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/julia_0.3.7-trusty1_amd64.deb"
+"http://cz.archive.ubuntu.com/ubuntu/pool/main/g/gcc-4.8/libgfortran-4.8-dev_4.8.2-19ubuntu1_amd64.deb"
+for dep in $deps; do
+  depb=$(basename $dep)
+  echo "        - $depb"
+  curl -LO $dep
+  dpkg -x $depb ${BUILD_DIR}/julia
+done
 
 # dep="https://github.com/JuliaLang/julia/releases/download/v0.3.7/julia-0.3.7_cb9bcae93a.tar.gz"
 # depb=$(basename $dep)
