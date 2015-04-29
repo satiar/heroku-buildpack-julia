@@ -35,7 +35,7 @@ set-env PATH '$HOME/julia/usr/bin/julia:$PATH'
 set-env LIBRARY_PATH '$HOME/julia/usr/lib:$HOME/julia/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH'
 set-env LD_LIBRARY_PATH '$HOME/julia/usr/lib:$HOME/julia/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH'
 
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${BUILD_DIR}/julia/usr/lib:${BUILD_DIR}/julia/usr/lib/x86_64-linux-gnu
+LD_LIBRARY_PATH=${BUILD_DIR}/julia/usr/lib:${BUILD_DIR}/julia/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 echo $LD_LIBRARY_PATH
 
 # dep="https://github.com/JuliaLang/julia/releases/download/v0.3.7/julia-0.3.7_cb9bcae93a.tar.gz"
@@ -57,7 +57,7 @@ cd ${BUILD_DIR}
 # these are not presistent in heroku
 julia/usr/bin/julia -e "Pkg.update()"
 for julia_dep in $(<"REQUIRE"); do
-  if [ $julia_dep == git* ] then
+  if [ $julia_dep == git* ]; then
     echo 'in clone'
      julia/usr/bin/julia -e "Pkg.clone(\"$julia_dep\")"
   else
