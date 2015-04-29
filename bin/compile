@@ -18,6 +18,8 @@ BP_DIR=`cd $(dirname $0); cd ..; pwd`
 
 cd ${BUILD_DIR}
 
+mkdir .profile.d
+
 echo -n "-----> Installing julia ...."
 
 deps="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/julia_0.3.7-trusty1_amd64.deb
