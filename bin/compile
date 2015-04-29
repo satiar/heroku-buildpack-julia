@@ -55,7 +55,11 @@ cd ${BUILD_DIR}
 # these are not presistent in heroku
 julia/usr/bin/julia -e "Pkg.update()"
 for julia_dep in $(<"REQUIRE"); do
+  if [$julia_dep == git*] then
+     julia/usr/bin/julia -e "Pkg.clone(\"$julia_dep\")"
+  else
     julia/usr/bin/julia -e "Pkg.add(\"$julia_dep\")"
+  fi
 done
 
 cp -r ~/.julia ${BUILD_DIR}/.julia
