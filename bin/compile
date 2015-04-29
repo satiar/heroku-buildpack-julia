@@ -15,6 +15,7 @@ cd ${BUILD_DIR}
 echo -n "-----> Installing julia ...."
 
 deps="https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/julia_0.3.7-trusty1_amd64.deb"
+"https://launchpad.net/~staticfloat/+archive/ubuntu/juliareleases/+files/libsuitesparse-dev_4.2.0-juliadeps1~raring_amd64.deb"
 "http://cz.archive.ubuntu.com/ubuntu/pool/main/g/gcc-4.8/libgfortran3_4.8.2-19ubuntu1_amd64.deb"
 for dep in $deps; do
   depb=$(basename $dep)
@@ -23,7 +24,10 @@ for dep in $deps; do
   dpkg -x $depb ${BUILD_DIR}/julia
 done
 
-printf 'push!(DL_LOAD_PATH, "/app/julia/usr/lib/x86_64-linux-gnu/")\npush!(DL_LOAD_PATH, "/app/julia/usr/lib/x86_64-linux-gnu/julia")' > ${BUILD_DIR}/.juliarc.jl
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${BUILD_DIR}/julia/usr/lib:${BUILD_DIR}/julia/usr/lib/x86_64-linux-gnu/
+set-env PATH '$HOME/julia/usr/bin/julia:$PATH'
+set-env LIBRARY_PATH '$HOME/julia/usr/lib:$HOME/julia/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH'
+set-env LD_LIBRARY_PATH '$HOME/julia/usr/lib:$HOME/julia/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH'
 
 # dep="https://github.com/JuliaLang/julia/releases/download/v0.3.7/julia-0.3.7_cb9bcae93a.tar.gz"
 # depb=$(basename $dep)
@@ -43,7 +47,6 @@ fi
 cd ${BUILD_DIR}
 # these are not presistent in heroku
 julia/usr/bin/julia -e "Pkg.update()"
-julia/usr/bin/julia -e "Pkg.clone(\"git://github.com/amgad-naiem/Nettle.jl\")"
 for julia_dep in $(<"REQUIRE"); do
     julia/usr/bin/julia -e "Pkg.add(\"$julia_dep\")"
 done
