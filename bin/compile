@@ -4,7 +4,7 @@
 # fail fast
 set -e
 
-PROFILE_PATH="$BUILD_DIR/.profile.d/julia.sh"
+PROFILE_PATH=".profile.d/julia.sh"
 
 set-env() {
   echo "export $1=$2" >> $PROFILE_PATH
@@ -17,8 +17,6 @@ CACHE_DIR=$2
 BP_DIR=`cd $(dirname $0); cd ..; pwd`
 
 cd ${BUILD_DIR}
-
-mkdir .profile.d
 
 echo -n "-----> Installing julia ...."
 
