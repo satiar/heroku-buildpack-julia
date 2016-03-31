@@ -61,7 +61,13 @@ for julia_dep in $(<"REQUIRE"); do
     echo 'in clone'
     julia/usr/bin/julia -e "Pkg.clone(\"$julia_dep\")"
   else
-    julia/usr/bin/julia -e "Pkg.add(\"$julia_dep\")"
+    i=0; for token in $julia_dep; do i=$((i+1)); done;
+    IFS=' ' read -r -a array <<< "$julia_dep"
+    if [[ ${#array[@]} > 1 ]]; then
+        julia/usr/bin/julia -e "Pkg.add(\"${#array[0]}\",\"${#array[1]}\")"
+    else
+        julia/usr/bin/julia -e "Pkg.add(\"$julia_dep\")"
+    fi
   fi
 done
 
