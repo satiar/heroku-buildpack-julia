@@ -61,7 +61,7 @@ while IFS='' read -r julia_dep || [[ -n "$julia_dep" ]]; do
     echo 'in clone'
     julia/usr/bin/julia -e "Pkg.clone(\"$julia_dep\")"
   else
-    array = ( $julia_dep )
+    array=( $julia_dep )
     if [[ ${#array[@]} > 1 ]]; then
         julia/usr/bin/julia -e "Pkg.add(\"${array[0]}\",v\"${array[1]}\", Pkg.available(\"${array[0]}\")[end])"
     else
